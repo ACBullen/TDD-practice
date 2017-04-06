@@ -10,6 +10,8 @@ class Deck
         @contents << Card.new(val, suit)
       end
     end
+
+    self.shuffle
   end
 
   def shuffle
