@@ -16,6 +16,18 @@ class Hand
     @contents << deck.draw
   end
 
+  def discard(card_idx_arr)
+    raise ArgumentError unless card_idx_arr.is_a? Array
+    raise "Invalid index" if card_idx_arr.any?{ |idx| !idx.between?(0,4) }
+    uniq_indices = card_idx_arr.uniq
+
+    uniq_indices.each do |idx|
+      @contents[idx] = nil
+    end
+
+    @contents.compact!
+  end
+
   def rank
     case true
     when flush? && straight?
@@ -40,7 +52,7 @@ class Hand
 
   end
 
-  private
+
 
   def suits
     @contents.map(&:suit)
@@ -49,6 +61,8 @@ class Hand
   def values
     @contents.map(&:val)
   end
+  
+  private
 
   def straight?
     acemoddedvalues = values.map{|val| val == 1 ? 14 : val}

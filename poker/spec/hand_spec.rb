@@ -48,14 +48,9 @@ describe Hand do
         Card.new(1, :H),
         Card.new(7, :D)
       ]
-      expected_hand = [
-        Card.new(4, :D),
-        Card.new(3, :S),
-        Card.new(7, :D)
-      ]
+      expected_hand = [4,3,7]
       hand.discard([0, 3])
-      hand.contents -= expected_hand
-      expect(hand.contents).to eq([])
+      expect(hand.values).to eq(expected_hand)
     end
   end
 
